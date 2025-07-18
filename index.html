@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 OSAKA 平和の祭典 黄金海フェスティバル</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts for typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Oswald:wght@700&family=Zen+Kurenaido&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom styles */
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #000000; /* Pure black for stronger contrast */
+            color: #F3F4F6;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+        .font-oswald { font-family: 'Oswald', sans-serif; }
+        .font-kurenaido { font-family: 'Zen Kurenaido', sans-serif; }
+        
+        .hero-bg {
+            /* ヒーローセクションの背景画像です。力強い武道家の画像などに差し替えてください */
+            background-image: url('https://placehold.co/1920x1080/000000/FFFFFF?text=Image+of+Martial+Artist+Silhouette');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .hero-overlay {
+            background: radial-gradient(circle, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.8) 80%);
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+        }
+        .gold-text {
+            background: linear-gradient(145deg, #FFD700, #FBBF24, #B8860B);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; text-fill-color: transparent;
+        }
+        .red-accent-text { color: #EF4444; /* red-500 */ }
+        .gold-border { border-color: #FBBF24; }
+        .gold-bg {
+            background: linear-gradient(145deg, #FBBF24, #FFD700);
+            transition: all 0.3s ease;
+        }
+        .gold-bg:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #FBBF24;
+        }
+        .section-title {
+            font-family: 'Zen Kurenaido', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+        .tab-button.active {
+            background: linear-gradient(145deg, #FBBF24, #FFD700);
+            color: #111827; border-color: #FBBF24;
+        }
+        .tab-button:hover:not(.active) {
+            background-color: #EF4444;
+            border-color: #EF4444;
+            color: #FFFFFF;
+        }
+        .tab-button { transition: all 0.3s ease; }
+
+        .panelist-card {
+            background-color: #1F2937;
+            border-left: 4px solid #FBBF24;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .panelist-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(239, 68, 68, 0.2);
+        }
+
+        .martial-arts-bg {
+            background-image: url('https://placehold.co/1200x800/000000/FFFFFF?text=Image+of+Dojo');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            background-color: rgba(17, 24, 39, 0.8);
+        }
+
+        /* Scroll Animation */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-section.is-visible { opacity: 1; transform: translateY(0); }
+
+        /* Particle Background */
+        #particles-js {
+            position: absolute;
+            width: 100%; height: 100%; z-index: 1;
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-100">
+
+    <!-- Header / Hero Section -->
+    <header class="hero-bg">
+        <div id="particles-js"></div>
+        <div class="hero-overlay"></div>
+        
+        <!-- Top Bar for Logo -->
+        <div class="absolute top-0 left-0 w-full p-6 flex justify-end items-center z-20">
+            <!-- ロゴ画像をここに配置します。実際のロゴファイルに差し替えてください。 -->
+            <img src="https://placehold.co/180x45/000000/FFD700?text=Gold+Ocean" alt="Gold Ocean Logo" class="h-8 md:h-10 opacity-80 hover:opacity-100 transition-opacity">
+        </div>
+
+        <div class="relative min-h-screen flex flex-col items-center justify-center text-center p-6 z-10">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-2xl md:text-3xl font-bold tracking-wider text-gray-300">2025 OSAKA 平和の祭典</h2>
+                <h1 class="font-kurenaido text-7xl md:text-9xl lg:text-[120px] font-black my-4 text-white drop-shadow-lg">
+                    <span class="gold-text">黄金海</span>フェスティバル
+                </h1>
+                <p class="text-2xl md:text-4xl font-bold mt-4 mb-8 text-white">東アジアから世界へ</p>
+                
+                <!-- Countdown Timer -->
+                <div id="countdown" class="my-10">
+                    <div class="text-2xl font-bold text-white mb-4">イベント開催まで</div>
+                    <div class="grid grid-cols-4 gap-2 md:gap-4 max-w-lg mx-auto text-white">
+                        <div class="bg-black bg-opacity-50 p-4 rounded-lg border border-gray-700"><div id="days" class="font-oswald text-4xl md:text-6xl gold-text">00</div><div class="text-sm">Days</div></div>
+                        <div class="bg-black bg-opacity-50 p-4 rounded-lg border border-gray-700"><div id="hours" class="font-oswald text-4xl md:text-6xl gold-text">00</div><div class="text-sm">Hours</div></div>
+                        <div class="bg-black bg-opacity-50 p-4 rounded-lg border border-gray-700"><div id="minutes" class="font-oswald text-4xl md:text-6xl gold-text">00</div><div class="text-sm">Minutes</div></div>
+                        <div class="bg-black bg-opacity-50 p-4 rounded-lg border border-gray-700"><div id="seconds" class="font-oswald text-4xl md:text-6xl gold-text">00</div><div class="text-sm">Seconds</div></div>
+                    </div>
+                </div>
+
+                <a href="#events" class="inline-block gold-bg text-gray-900 font-bold py-4 px-10 rounded-lg text-xl shadow-lg">イベント詳細を見る</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Concept Section -->
+        <section class="py-20 px-6 bg-black fade-in-section">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="section-title text-5xl md:text-6xl mb-6">
+                    <span class="gold-text">平和の海</span>へ
+                </h2>
+                <p class="text-lg md:text-xl leading-relaxed text-gray-300">人々が往来し、誰もが愛する「日本海・東海」を、<br class="hidden md:block">文化と経済が交わる平和の海へ。</p>
+                <p class="mt-4 text-gray-400">「黄金海フェスティバル」は、東アジアの平和と共存、そして未来への希望を創造する祭典です。</p>
+            </div>
+        </section>
+
+        <!-- Events Section -->
+        <section id="events" class="py-20 px-6 fade-in-section bg-gray-900">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="section-title text-5xl md:text-6xl text-center mb-12"><span class="gold-text">EVENTS</span></h2>
+                <div class="mb-8 flex flex-wrap justify-center gap-2 md:gap-4">
+                    <button onclick="changeTab(event, 'martial-arts')" class="tab-button active font-bold py-2 px-6 rounded-full border-2 gold-border">武道フェスティバル</button>
+                    <button onclick="changeTab(event, 'forum')" class="tab-button font-bold py-2 px-6 rounded-full border-2 border-gray-600">国際平和・経済フォーラム</button>
+                    <button onclick="changeTab(event, 'culture')" class="tab-button font-bold py-2 px-6 rounded-full border-2 border-gray-600">国際文化交流</button>
+                </div>
+
+                <div id="event-content" class="bg-black p-6 sm:p-10 rounded-lg shadow-2xl border border-gray-700">
+                    <!-- Martial Arts Festival -->
+                    <div id="martial-arts" class="tab-content">
+                        <div class="p-8 rounded-lg martial-arts-bg">
+                            <h3 class="font-kurenaido text-4xl md:text-5xl gold-text mb-2 text-center">東アジア3大武道フェスティバル</h3>
+                            <p class="text-gray-300 mb-6 text-lg text-center">11:00 - 17:30 | 大ホール</p>
+                            <div class="flex justify-center items-center gap-4 md:gap-8 my-6">
+                                <div class="text-center">
+                                    <svg class="w-12 h-12 mx-auto red-accent-text" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                                    <p class="font-bold mt-2">空手</p>
+                                </div>
+                                <div class="text-center">
+                                    <svg class="w-12 h-12 mx-auto red-accent-text" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                    <p class="font-bold mt-2">柔道</p>
+                                </div>
+                                <div class="text-center">
+                                    <svg class="w-12 h-12 mx-auto red-accent-text" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                    <p class="font-bold mt-2">テコンドー</p>
+                                </div>
+                            </div>
+                            <p class="mb-6 text-xl font-bold text-center">「心技一体」が一つになる華やかな舞台を体感！</p>
+                            <p class="text-gray-300 leading-relaxed text-center max-w-2xl mx-auto">武道には平和を育てる力がある。相手を傷つけたり、ただ技を競ったりするものではない。自分を守る術から始まり、経緯の中で武道精神が宿り、誇りを常に心に流されず冷静に判断する力や、優しさを生む心が生まれる。本質の強さは争いを求めず、避け、和合に至る。相手を尊重する姿勢が大切にされている。</p>
+                        </div>
+                    </div>
+                    <!-- Other tabs content remain same -->
+                    <div id="forum" class="tab-content" style="display: none;">
+                        <h3 class="font-oswald text-3xl gold-text mb-2">国際平和・経済フォーラム</h3>
+                        <p class="text-gray-400 mb-6 text-lg">13:00 - 15:00 | 大会議室「さくら」</p>
+                        <p class="mb-6 text-xl font-bold">「日本海 x 東海 = 黄金の海」と成しえるアイデアを世界へ発信!!</p>
+                        <p class="text-gray-300 leading-relaxed mb-8">今、世界は「戦争か平和か」「共存か共滅か」という大きな分かれ道に立っている。私たちの身近な日本海・東海を囲む国々―日本、韓国、朝鮮、中国、ロシアにおいても、緊張や対立が続いている。そんな中で、目先の経済的な利益の追求だけでなく「未来予想図」を専門家と共に考え、学び、未来への希望あるビジョンを世界に届けていく。</p>
+                        <h4 class="font-bold text-xl mb-4 gold-text">パネラー</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="panelist-card p-4"><p class="text-lg font-bold">三村 光弘</p><p class="text-sm text-gray-400">新潟県立大学国際経済学部教授 / 前ERINA環日本海経済研究所研究員</p></div>
+                            <div class="panelist-card p-4"><p class="text-lg font-bold">福原 裕二</p><p class="text-sm text-gray-400">立命館アジア太平洋大学アジア太平洋学部教授 / 前立命館大学国際関係学部教授</p></div>
+                            <div class="panelist-card p-4"><p class="text-lg font-bold">鄭 在貞</p><p class="text-sm text-gray-400">ソウル大学歴史学部人文科学研究科卒業 / ソウル市立大学国史学科名誉教授</p></div>
+                            <div class="panelist-card p-4"><p class="text-lg font-bold">林 在範</p><p class="text-sm text-gray-400">株式会社コリアンアーツ代表理事 / TGI東北アジア研究会代表</p></div>
+                        </div>
+                    </div>
+                    <div id="culture" class="tab-content" style="display: none;">
+                        <h3 class="font-oswald text-3xl gold-text mb-2">国際文化交流イベント</h3>
+                        <p class="text-gray-400 mb-6 text-lg">11月1日 - 3日</p>
+                        <p class="text-gray-300 leading-relaxed">イベント開催地大阪をはじめ、近畿地方には歴史の地、奈良もあります。奈良時代、日本と朝鮮半島とのつながりは深く、のちに朝鮮通信使との間で心が響き合う交流時代を築きました。そんな歴史的背景をもとに「歴史ロマンの旅路」や「第28回 大阪国際交流まつりフェスティバル」「歌と踊りの文化交流」など、海外のゲストを迎えた、楽しく集う交流イベントを開催致します。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Access Section -->
+        <section id="access" class="py-20 px-6 bg-black fade-in-section">
+            <div class="max-w-5xl mx-auto text-center">
+                <h2 class="section-title text-5xl md:text-6xl mb-12"><span class="gold-text">ACCESS</span></h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="text-left">
+                        <h3 class="font-bold text-2xl mb-4">大阪国際交流センター</h3>
+                        <p class="text-lg mb-2">〒543-0001 大阪市天王寺区上本町8-2-6</p>
+                        <p class="text-gray-400">近鉄「大阪上本町」駅から徒歩約5分</p>
+                        <p class="text-gray-400">Osaka Metro「谷町九丁目」駅から徒歩約10分</p>
+                        <a href="https://www.ih-osaka.or.jp/access/" target="_blank" rel="noopener noreferrer" class="mt-6 inline-block gold-text font-bold hover:red-accent-text transition">公式サイトで地図を見る &rarr;</a>
+                    </div>
+                    <div class="rounded-lg overflow-hidden shadow-2xl h-64 md:h-80 border-2 border-gray-700"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3281.649692994086!2d135.5198218152311!3d34.66358398044391!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000e746b1603fc1%3A0x4ba404f64a7498c1!2sOsaka%20International%20House%20Foundation!5e0!3m2!1sen!2sjp!4v1658123456789!5m2!1sen!2sjp" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="py-16 px-6 text-center fade-in-section bg-gray-900">
+            <div class="max-w-4xl mx-auto">
+                <p class="font-bold text-lg mb-2">お問い合わせ</p>
+                <p>有限会社 濤声</p>
+                <p>TEL: 072-929-4447</p>
+                <p>Email: info@gold-o.com</p>
+                <a href="https://gold-o.com" target="_blank" rel="noopener noreferrer" class="gold-text hover:red-accent-text">https://gold-o.com</a>
+                <div class="mt-8 border-t border-gray-700 pt-8">
+                    <p class="font-bold text-xl mb-4">主催: 黄金海フェスティバル実行委員会</p>
+                    
+                    <!-- Gold Ocean Branding -->
+                    <div class="my-6">
+                        <p class="font-oswald text-2xl gold-text">Gold Ocean</p>
+                    </div>
+
+                    <p class="text-gray-500 text-sm">&copy; 2025 Golden Sea Festival Executive Committee. All Rights Reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- particles.js library -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+    <script>
+        // --- Particles.js Configuration ---
+        particlesJS('particles-js', {
+          "particles": {
+            "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+            "color": { "value": ["#FFD700", "#FF4500", "#DC143C", "#FFFFFF"] },
+            "shape": { "type": "circle" },
+            "opacity": { "value": 0.8, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.3, "sync": false } },
+            "size": { "value": 3, "random": true, "anim": { "enable": true, "speed": 4, "size_min": 0.1, "sync": false } },
+            "line_linked": { "enable": false },
+            "move": { "enable": true, "speed": 2, "direction": "top", "random": true, "straight": false, "out_mode": "out", "bounce": false }
+          },
+          "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false }, "resize": true } },
+          "retina_detect": true
+        });
+
+        // --- Countdown Timer ---
+        const countDownDate = new Date("Nov 2, 2025 11:00:00").getTime();
+        const countdownFunction = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            document.getElementById("days").innerText = days.toString().padStart(2, '0');
+            document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
+            if (distance < 0) {
+                clearInterval(countdownFunction);
+                document.getElementById("countdown").innerHTML = "<div class='text-3xl font-bold gold-text'>イベントは開催されました！</div>";
+            }
+        }, 1000);
+
+        // --- Tab Functionality ---
+        function changeTab(event, tabId) {
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.style.display = 'none');
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabButtons.forEach(button => button.classList.remove('active'));
+            document.getElementById(tabId).style.display = 'block';
+            event.currentTarget.classList.add('active');
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.tab-button').click();
+        });
+
+        // --- Scroll Animation ---
+        const sections = document.querySelectorAll('.fade-in-section');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
